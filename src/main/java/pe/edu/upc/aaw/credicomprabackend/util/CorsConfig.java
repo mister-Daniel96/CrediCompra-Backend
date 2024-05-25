@@ -14,7 +14,7 @@ public class CorsConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("http://localhost:4200")  // Ajusta el origen permitido
+                        .allowedOrigins("http://localhost:4200", "http://localhost:8080")  // Ajusta los orígenes permitidos
                         .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
                         .allowedHeaders("*")
                         .allowCredentials(true);
@@ -22,3 +22,4 @@ public class CorsConfig {
         };
     }
 }
+// SI DESEO PUEDO USAR EL CORS DEL CICLO 2023-2 PERO ESTE ES MAS CORTO
