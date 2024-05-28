@@ -10,24 +10,22 @@ public class Pago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPago;
-
+    @ManyToOne
+    @JoinColumn(name = "idCredito")
+    private Credito credito;
     @Column(name = "amountPago")
     private Double amountPago;
-    @Column(name = "datePagoVencimiento")
-    private LocalDate datePagoVencimiento;
-
-    @ManyToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
+    @Column(name = "datePago")
+    private LocalDate datePago;
 
     public Pago() {
     }
 
-    public Pago(Long idPago, Double amountPago, LocalDate datePagoVencimiento, Usuario usuario) {
+    public Pago(Long idPago, Credito credito, Double amountPago, LocalDate datePago) {
         this.idPago = idPago;
+        this.credito = credito;
         this.amountPago = amountPago;
-        this.datePagoVencimiento = datePagoVencimiento;
-        this.usuario = usuario;
+        this.datePago = datePago;
     }
 
     public Long getIdPago() {
@@ -38,6 +36,14 @@ public class Pago {
         this.idPago = idPago;
     }
 
+    public Credito getCredito() {
+        return credito;
+    }
+
+    public void setCredito(Credito credito) {
+        this.credito = credito;
+    }
+
     public Double getAmountPago() {
         return amountPago;
     }
@@ -46,19 +52,11 @@ public class Pago {
         this.amountPago = amountPago;
     }
 
-    public LocalDate getDatePagoVencimiento() {
-        return datePagoVencimiento;
+    public LocalDate getDatePago() {
+        return datePago;
     }
 
-    public void setDatePagoVencimiento(LocalDate datePagoVencimiento) {
-        this.datePagoVencimiento = datePagoVencimiento;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setDatePago(LocalDate datePago) {
+        this.datePago = datePago;
     }
 }
