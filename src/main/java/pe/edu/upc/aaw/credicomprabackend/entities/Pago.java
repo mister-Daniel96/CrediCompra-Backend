@@ -5,11 +5,13 @@ import java.time.LocalDate;
 
 @Entity
 @Table(name="Pago")
+
 public class Pago {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPago;
+
     @ManyToOne
     @JoinColumn(name = "idCredito")
     private Credito credito;
@@ -17,6 +19,8 @@ public class Pago {
     private Double amountPago;
     @Column(name = "datePago")
     private LocalDate datePago;
+    @Column(name = "enablePago")
+    private Boolean enablePago;
 
     public Pago() {
     }

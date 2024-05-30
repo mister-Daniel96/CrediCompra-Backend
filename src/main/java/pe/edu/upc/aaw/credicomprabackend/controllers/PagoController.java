@@ -16,7 +16,6 @@ public class PagoController {
     @Autowired
     private IPagoService iP;
 
-
     @PostMapping
     public void crear(@RequestBody PagoDTO pago) {
         ModelMapper m = new ModelMapper();

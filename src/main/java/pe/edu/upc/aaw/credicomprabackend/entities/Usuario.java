@@ -30,6 +30,9 @@ public class Usuario {
     @Column (name= "creditUsuario", nullable = false)
     private Double creditUsuario;
 
+    @Column (name= "creditUsuarioAvailable")
+    private Double creditUsuarioAvailable;
+
     @JsonIgnore
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.EAGER)
     private List<TypeUser> roles;
@@ -37,15 +40,18 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Long idUsuario, String nameUsuario, String passwordUsuario, String emailUsuario, String streetUsuario, Long ageUsuario, Long dniUsuario, Double creditUsuario) {
+    public Usuario(Long idUsuario, String nameUsuario, String passwordUsuario, String emailUsuario, Boolean enabledUsuario, String streetUsuario, Long ageUsuario, Long dniUsuario, Double creditUsuario, Double creditUsuarioAvailable, List<TypeUser> roles) {
         this.idUsuario = idUsuario;
         this.nameUsuario = nameUsuario;
         this.passwordUsuario = passwordUsuario;
         this.emailUsuario = emailUsuario;
+        this.enabledUsuario = enabledUsuario;
         this.streetUsuario = streetUsuario;
         this.ageUsuario = ageUsuario;
         this.dniUsuario = dniUsuario;
         this.creditUsuario = creditUsuario;
+        this.creditUsuarioAvailable = creditUsuarioAvailable;
+        this.roles = roles;
     }
 
     public Long getIdUsuario() {
@@ -126,5 +132,13 @@ public class Usuario {
 
     public void setCreditUsuario(Double creditUsuario) {
         this.creditUsuario = creditUsuario;
+    }
+
+    public Double getCreditUsuarioAvailable() {
+        return creditUsuarioAvailable;
+    }
+
+    public void setCreditUsuarioAvailable(Double creditUsuarioAvailable) {
+        this.creditUsuarioAvailable = creditUsuarioAvailable;
     }
 }

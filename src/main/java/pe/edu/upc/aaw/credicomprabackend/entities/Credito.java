@@ -6,6 +6,7 @@ import javax.persistence.*;
 @Table(name="Credito")
 
 public class Credito {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCredito;
@@ -13,20 +14,29 @@ public class Credito {
     @ManyToOne
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
-
+    @Column(name = "interestRate")
     private Double interestRate; //Ejm.: 24.5%
+    @Column(name = "rateTime")
     private String rateTime; //Ejm.: Tasa nominal "ANUAL" "QUINCENAL" "MENSUAL"
+    @Column(name = "capitalization")
     private String capitalization; //Esto es obvio :V
+    @Column(name = "currency")
     private String currency; //Ejm.: Soles o dolares
+    @Column(name = "duration")
     private String duration; //Duracion del prestamo Ejm.: anual
+    @Column(name = "rateType")
     private boolean rateType; //Ejm.: Tasa nominal o efectiva ESTE SERA COMO UN TRIGGER
+    @Column(name = "totalAmount")
     private double totalAmount; //El monto del credito total
+    @Column(name = "remainingAmount")
     private double remainingAmount; //El monto que le falta pagar del total, seria la diferencia del monto total con la suma de todos los pagos
+    @Column(name = "enableCredito")
+    private Boolean enableCredito; //Para determinar si pago el credito
 
     public Credito() {
     }
 
-    public Credito(Long idCredito, Usuario usuario, Double interestRate, String rateTime, String capitalization, String currency, String duration, boolean rateType, double totalAmount, double remainingAmount) {
+    public Credito(Long idCredito, Usuario usuario, Double interestRate, String rateTime, String capitalization, String currency, String duration, boolean rateType, double totalAmount, double remainingAmount, Boolean enableCredito) {
         this.idCredito = idCredito;
         this.usuario = usuario;
         this.interestRate = interestRate;
@@ -37,6 +47,7 @@ public class Credito {
         this.rateType = rateType;
         this.totalAmount = totalAmount;
         this.remainingAmount = remainingAmount;
+        this.enableCredito = enableCredito;
     }
 
     public Long getIdCredito() {
@@ -117,5 +128,13 @@ public class Credito {
 
     public void setRemainingAmount(double remainingAmount) {
         this.remainingAmount = remainingAmount;
+    }
+
+    public Boolean getEnableCredito() {
+        return enableCredito;
+    }
+
+    public void setEnableCredito(Boolean enableCredito) {
+        this.enableCredito = enableCredito;
     }
 }
