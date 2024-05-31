@@ -53,7 +53,7 @@ public class UsuarioController {
 
         // Crear y persistir el TypeUser asociado al usuario gestionado
         TypeUser rol = new TypeUser();
-        rol.setTypeTypeUser("user");
+        rol.setTypeTypeUser("CLIENTE");
         rol.setUser(usuarioGestionado.get(0));
         tS.insert(rol);
     }
