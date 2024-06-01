@@ -25,7 +25,7 @@ public class Credito {
     @Column(name = "duration")
     private String duration; //Duracion del prestamo Ejm.: anual
     @Column(name = "rateType")
-    private boolean rateType; //Ejm.: Tasa nominal o efectiva ESTE SERA COMO UN TRIGGER
+    private String rateType; //Ejm.: Tasa nominal o efectiva ESTE SERA COMO UN TRIGGER
     @Column(name = "totalAmount")
     private double totalAmount; //El monto del credito total
     @Column(name = "remainingAmount")
@@ -36,7 +36,7 @@ public class Credito {
     public Credito() {
     }
 
-    public Credito(Long idCredito, Usuario usuario, Double interestRate, String rateTime, String capitalization, String currency, String duration, boolean rateType, double totalAmount, double remainingAmount, Boolean enableCredito) {
+    public Credito(Long idCredito, Usuario usuario, Double interestRate, String rateTime, String capitalization, String currency, String duration, String rateType, double totalAmount, double remainingAmount, Boolean enableCredito) {
         this.idCredito = idCredito;
         this.usuario = usuario;
         this.interestRate = interestRate;
@@ -106,11 +106,11 @@ public class Credito {
         this.duration = duration;
     }
 
-    public boolean isRateType() {
+    public String isRateType() {
         return rateType;
     }
 
-    public void setRateType(boolean rateType) {
+    public void setRateType(String rateType) {
         this.rateType = rateType;
     }
 

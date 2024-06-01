@@ -10,7 +10,7 @@ public class CreditoDTO {
     private String capitalization;
     private String currency;
     private String duration;
-    private boolean rateType;
+    private String rateType;
     private double totalAmount;
     private double remainingAmount;
     private Boolean enableCredito;
@@ -71,11 +71,11 @@ public class CreditoDTO {
         this.duration = duration;
     }
 
-    public boolean isRateType() {
+    public String isRateType() {
         return rateType;
     }
 
-    public void setRateType(boolean rateType) {
+    public void setRateType(String rateType) {
         this.rateType = rateType;
     }
 

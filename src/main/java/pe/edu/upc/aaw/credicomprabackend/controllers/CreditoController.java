@@ -36,10 +36,10 @@ public class CreditoController {
         }).collect(Collectors.toList());
     }
 
-    @PutMapping("/{id}")
-    public CreditoDTO modificar(@PathVariable Long id) {
-        ModelMapper m=new ModelMapper();
-        CreditoDTO p=m.map(cS.listarId(id),CreditoDTO.class);
-        return p;
+    @PutMapping
+    public void modificar(@RequestBody CreditoDTO creditoDTO) {
+        ModelMapper m = new ModelMapper();
+        Credito a = m.map(creditoDTO, Credito.class);
+        cS.insert(a);
     }
 }
