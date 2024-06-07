@@ -3,7 +3,9 @@ package pe.edu.upc.aaw.credicomprabackend.controllers;
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.aaw.credicomprabackend.dtos.CreditoDTO;
 import pe.edu.upc.aaw.credicomprabackend.dtos.PagoDTO;
+import pe.edu.upc.aaw.credicomprabackend.entities.Credito;
 import pe.edu.upc.aaw.credicomprabackend.entities.Pago;
 import pe.edu.upc.aaw.credicomprabackend.serviceInterfaces.IPagoService;
 
@@ -15,7 +17,6 @@ import java.util.stream.Collectors;
 public class PagoController {
     @Autowired
     private IPagoService iP;
-
 
     @PostMapping
     public void crear(@RequestBody PagoDTO pago) {
@@ -37,10 +38,10 @@ public class PagoController {
                 }).collect(Collectors.toList());
     }
 
-    @PutMapping("/{id}")
-    public PagoDTO modificar(@PathVariable Long id) {
-        ModelMapper m=new ModelMapper();
-        PagoDTO p=m.map(iP.listarId(id),PagoDTO.class);
-        return p;
+    @PutMapping
+    public void modificar(@RequestBody PagoDTO pagoDTO) {
+        ModelMapper m = new ModelMapper();
+        Pago a = m.map(pagoDTO, Pago.class);
+        iP.insert(a);
     }
 }

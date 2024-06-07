@@ -1,16 +1,15 @@
 package pe.edu.upc.aaw.credicomprabackend.dtos;
 
 
-import pe.edu.upc.aaw.credicomprabackend.entities.Usuario;
-
+import pe.edu.upc.aaw.credicomprabackend.entities.Credito;
 import java.time.LocalDate;
 
 public class PagoDTO {
     private Long idPago;
-
+    private Credito credito;
     private Double amountPago;
-    private LocalDate datePagoVencimiento;
-    private Usuario usuario;
+    private LocalDate datePago;
+    private Boolean enablePago;
 
     public Long getIdPago() {
         return idPago;
@@ -18,6 +17,14 @@ public class PagoDTO {
 
     public void setIdPago(Long idPago) {
         this.idPago = idPago;
+    }
+
+    public Credito getCredito() {
+        return credito;
+    }
+
+    public void setCredito(Credito credito) {
+        this.credito = credito;
     }
 
     public Double getAmountPago() {
@@ -28,19 +35,19 @@ public class PagoDTO {
         this.amountPago = amountPago;
     }
 
-    public LocalDate getDatePagoVencimiento() {
-        return datePagoVencimiento;
+    public LocalDate getDatePago() {
+        return datePago;
     }
 
-    public void setDatePagoVencimiento(LocalDate datePagoVencimiento) {
-        this.datePagoVencimiento = datePagoVencimiento;
+    public void setDatePago(LocalDate datePago) {
+        this.datePago = datePago;
     }
 
-    public Usuario getUsuario() {
-        return usuario;
+    public Boolean getEnablePago() {
+        return enablePago;
     }
 
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
+    public void setEnablePago(Boolean enablePago) {
+        this.enablePago = enablePago;
     }
 }
