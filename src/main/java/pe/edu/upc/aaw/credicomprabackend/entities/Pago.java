@@ -25,11 +25,12 @@ public class Pago {
     public Pago() {
     }
 
-    public Pago(Long idPago, Credito credito, Double amountPago, LocalDate datePago) {
+    public Pago(Long idPago, Credito credito, Double amountPago, LocalDate datePago, Boolean enablePago) {
         this.idPago = idPago;
         this.credito = credito;
         this.amountPago = amountPago;
         this.datePago = datePago;
+        this.enablePago = enablePago;
     }
 
     public Long getIdPago() {
@@ -62,5 +63,13 @@ public class Pago {
 
     public void setDatePago(LocalDate datePago) {
         this.datePago = datePago;
+    }
+
+    public Boolean getEnablePago() {
+        return enablePago;
+    }
+
+    public void setEnablePago(Boolean enablePago) {
+        this.enablePago = enablePago;
     }
 }

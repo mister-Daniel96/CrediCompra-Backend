@@ -1,6 +1,7 @@
 package pe.edu.upc.aaw.credicomprabackend.entities;
 
 import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
 @Table(name="Credito")
@@ -16,37 +17,31 @@ public class Credito {
     private Usuario usuario;
     @Column(name = "interestRate")
     private Double interestRate; //Ejm.: 24.5%
-    @Column(name = "rateTime")
-    private String rateTime; //Ejm.: Tasa nominal "ANUAL" "QUINCENAL" "MENSUAL"
-    @Column(name = "capitalization")
-    private String capitalization; //Esto es obvio :V
-    @Column(name = "currency")
-    private String currency; //Ejm.: Soles o dolares
     @Column(name = "duration")
-    private String duration; //Duracion del prestamo Ejm.: anual
-    @Column(name = "rateType")
-    private String rateType; //Ejm.: Tasa nominal o efectiva ESTE SERA COMO UN TRIGGER
-    @Column(name = "totalAmount")
-    private double totalAmount; //El monto del credito total
+    private String duration; //Duracion en meses
+    @Column(name = "dateRecorded")
+    private LocalDate dateRecorded; //La fecha que se registra el credito
+    @Column(name = "currentValue")
+    private double currentValue; //SI LEES ESTO EXPLICA QUE ES ESTA WEA :v
     @Column(name = "remainingAmount")
     private double remainingAmount; //El monto que le falta pagar del total, seria la diferencia del monto total con la suma de todos los pagos
+    @Column(name = "annuities")
+    private Boolean annuities; //si es con anualidades se hace la operacion sino solo se saca el VF para el plazo dado
     @Column(name = "enableCredito")
     private Boolean enableCredito; //Para determinar si pago el credito
 
     public Credito() {
     }
 
-    public Credito(Long idCredito, Usuario usuario, Double interestRate, String rateTime, String capitalization, String currency, String duration, String rateType, double totalAmount, double remainingAmount, Boolean enableCredito) {
+    public Credito(Long idCredito, Usuario usuario, Double interestRate, String duration, LocalDate dateRecorded, double currentValue, double remainingAmount, Boolean annuities, Boolean enableCredito) {
         this.idCredito = idCredito;
         this.usuario = usuario;
         this.interestRate = interestRate;
-        this.rateTime = rateTime;
-        this.capitalization = capitalization;
-        this.currency = currency;
         this.duration = duration;
-        this.rateType = rateType;
-        this.totalAmount = totalAmount;
+        this.dateRecorded = dateRecorded;
+        this.currentValue = currentValue;
         this.remainingAmount = remainingAmount;
+        this.annuities = annuities;
         this.enableCredito = enableCredito;
     }
 
@@ -74,30 +69,6 @@ public class Credito {
         this.interestRate = interestRate;
     }
 
-    public String getRateTime() {
-        return rateTime;
-    }
-
-    public void setRateTime(String rateTime) {
-        this.rateTime = rateTime;
-    }
-
-    public String getCapitalization() {
-        return capitalization;
-    }
-
-    public void setCapitalization(String capitalization) {
-        this.capitalization = capitalization;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
     public String getDuration() {
         return duration;
     }
@@ -106,20 +77,20 @@ public class Credito {
         this.duration = duration;
     }
 
-    public String isRateType() {
-        return rateType;
+    public LocalDate getDateRecorded() {
+        return dateRecorded;
     }
 
-    public void setRateType(String rateType) {
-        this.rateType = rateType;
+    public void setDateRecorded(LocalDate dateRecorded) {
+        this.dateRecorded = dateRecorded;
     }
 
-    public double getTotalAmount() {
-        return totalAmount;
+    public double getCurrentValue() {
+        return currentValue;
     }
 
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setCurrentValue(double currentValue) {
+        this.currentValue = currentValue;
     }
 
     public double getRemainingAmount() {
@@ -128,6 +99,14 @@ public class Credito {
 
     public void setRemainingAmount(double remainingAmount) {
         this.remainingAmount = remainingAmount;
+    }
+
+    public Boolean getAnnuities() {
+        return annuities;
+    }
+
+    public void setAnnuities(Boolean annuities) {
+        this.annuities = annuities;
     }
 
     public Boolean getEnableCredito() {

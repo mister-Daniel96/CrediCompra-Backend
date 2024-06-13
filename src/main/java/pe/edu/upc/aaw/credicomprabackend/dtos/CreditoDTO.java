@@ -1,18 +1,17 @@
 package pe.edu.upc.aaw.credicomprabackend.dtos;
-
 import pe.edu.upc.aaw.credicomprabackend.entities.Usuario;
+
+import java.time.LocalDate;
 
 public class CreditoDTO {
     private Long idCredito;
     private Usuario usuario;
     private Double interestRate;
-    private String rateTime;
-    private String capitalization;
-    private String currency;
     private String duration;
-    private String rateType;
-    private double totalAmount;
+    private LocalDate dateRecorded;
+    private double currentValue;
     private double remainingAmount;
+    private Boolean annuities;
     private Boolean enableCredito;
 
     public Long getIdCredito() {
@@ -39,30 +38,6 @@ public class CreditoDTO {
         this.interestRate = interestRate;
     }
 
-    public String getRateTime() {
-        return rateTime;
-    }
-
-    public void setRateTime(String rateTime) {
-        this.rateTime = rateTime;
-    }
-
-    public String getCapitalization() {
-        return capitalization;
-    }
-
-    public void setCapitalization(String capitalization) {
-        this.capitalization = capitalization;
-    }
-
-    public String getCurrency() {
-        return currency;
-    }
-
-    public void setCurrency(String currency) {
-        this.currency = currency;
-    }
-
     public String getDuration() {
         return duration;
     }
@@ -71,20 +46,20 @@ public class CreditoDTO {
         this.duration = duration;
     }
 
-    public String isRateType() {
-        return rateType;
+    public LocalDate getDateRecorded() {
+        return dateRecorded;
     }
 
-    public void setRateType(String rateType) {
-        this.rateType = rateType;
+    public void setDateRecorded(LocalDate dateRecorded) {
+        this.dateRecorded = dateRecorded;
     }
 
-    public double getTotalAmount() {
-        return totalAmount;
+    public double getCurrentValue() {
+        return currentValue;
     }
 
-    public void setTotalAmount(double totalAmount) {
-        this.totalAmount = totalAmount;
+    public void setCurrentValue(double currentValue) {
+        this.currentValue = currentValue;
     }
 
     public double getRemainingAmount() {
@@ -93,6 +68,14 @@ public class CreditoDTO {
 
     public void setRemainingAmount(double remainingAmount) {
         this.remainingAmount = remainingAmount;
+    }
+
+    public Boolean getAnnuities() {
+        return annuities;
+    }
+
+    public void setAnnuities(Boolean annuities) {
+        this.annuities = annuities;
     }
 
     public Boolean getEnableCredito() {
