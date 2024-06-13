@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.aaw.credicomprabackend.dtos.CreditoDTO;
+import pe.edu.upc.aaw.credicomprabackend.dtos.PagoDTO;
 import pe.edu.upc.aaw.credicomprabackend.entities.Credito;
 import pe.edu.upc.aaw.credicomprabackend.entities.Pago;
 import pe.edu.upc.aaw.credicomprabackend.serviceInterfaces.ICreditoService;
@@ -66,6 +67,12 @@ public class CreditoController {
             LocalDate dateExpiration = credito.getDateRecorded().plusMonths(i);
             pago.setDateExpiration(dateExpiration);
             pago.setEnablePago(true);
+            pago.setCredito(credito);
+
+            //INSERTAMOS EN LA BD
+            ModelMapper m = new ModelMapper();
+            PagoDTO d = m.map(pago, PagoDTO.class);
+            PC.crear(d);
         }
     }
 
@@ -79,6 +86,11 @@ public class CreditoController {
         LocalDate dateExpiration = credito.getDateRecorded().plusMonths(credito.getDuration());
         pago.setDateExpiration(dateExpiration);
         pago.setEnablePago(true);
+        pago.setCredito(credito);
 
+        //INSERTAMOS EN LA BD
+        ModelMapper m=new ModelMapper();
+        PagoDTO d=m.map(pago,PagoDTO.class);
+        PC.crear(d);
     }
 }

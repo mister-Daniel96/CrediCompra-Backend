@@ -25,10 +25,12 @@ public class Usuario {
     private String streetUsuario;
     @Column(name="ageUsuario")
     private Long ageUsuario;
-    @Column (name = "dniUsuario",nullable = false,length = 45,unique = true)
+    @Column (name = "dniUsuario",nullable = false,length = 45)
     private Long dniUsuario;
     @Column (name= "creditUsuario", nullable = false)
     private Double creditUsuario;
+    @Column(name = "saldoUsuario")
+    private Double saldoUsuario;
 
     @Column (name= "creditUsuarioAvailable")
     private Double creditUsuarioAvailable;
@@ -40,7 +42,10 @@ public class Usuario {
     public Usuario() {
     }
 
-    public Usuario(Long idUsuario, String nameUsuario, String passwordUsuario, String emailUsuario, Boolean enabledUsuario, String streetUsuario, Long ageUsuario, Long dniUsuario, Double creditUsuario, Double creditUsuarioAvailable, List<TypeUser> roles) {
+    public Usuario(Long idUsuario, String nameUsuario, String passwordUsuario, String emailUsuario,
+                   Boolean enabledUsuario, String streetUsuario, Long ageUsuario,
+                   Long dniUsuario, Double creditUsuario, Double creditUsuarioAvailable,Double saldoUsuario,
+                   List<TypeUser> roles) {
         this.idUsuario = idUsuario;
         this.nameUsuario = nameUsuario;
         this.passwordUsuario = passwordUsuario;
@@ -52,6 +57,15 @@ public class Usuario {
         this.creditUsuario = creditUsuario;
         this.creditUsuarioAvailable = creditUsuarioAvailable;
         this.roles = roles;
+        this.saldoUsuario=saldoUsuario;
+    }
+
+    public Double getSaldoUsuario() {
+        return saldoUsuario;
+    }
+
+    public void setSaldoUsuario(Double saldoUsuario) {
+        this.saldoUsuario = saldoUsuario;
     }
 
     public Long getIdUsuario() {
