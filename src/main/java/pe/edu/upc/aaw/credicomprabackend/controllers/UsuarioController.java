@@ -31,6 +31,14 @@ public class UsuarioController {
         Usuario d = m.map(dto, Usuario.class);
         dS.insert(d);
     }
+
+    @PutMapping
+    public void actualizar(@RequestBody UsuarioDTO dto) {
+        ModelMapper m = new ModelMapper();
+        Usuario d = m.map(dto, Usuario.class);
+        dS.insert(d);
+    }
+
     //ES PARA EL REGISTRAR SIN AUTENTICACION EN EL FRONT
     @PostMapping("/registerUser")
     public void registrarNuevo(@RequestBody UsuarioDTO dto) {
@@ -57,6 +65,7 @@ public class UsuarioController {
         rol.setUser(usuarioGestionado.get(0));
         tS.insert(rol);
     }
+
     @GetMapping
     //@PreAuthorize("hasAuthority('user') or hasAuthority('admin')")
     public List<UsuarioDTO> listar() {
@@ -66,19 +75,24 @@ public class UsuarioController {
         }).collect(Collectors.toList());
     }
 
-
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUser(@PathVariable Long id){
+    public void eliminar(@PathVariable Long id) {
         dS.delete(id);
-        return ResponseEntity.ok("Usuario eliminado correctamente");
     }
+
+    /*
+        @DeleteMapping("/{id}")
+        public ResponseEntity<String> deleteUser(@PathVariable Long id){
+            dS.delete(id);
+            return ResponseEntity.ok("Usuario eliminado correctamente");
+        }*/
     @GetMapping("/{id}")
     public UsuarioDTO listarId(@PathVariable("id") Long id) {
         ModelMapper m = new ModelMapper();
         UsuarioDTO d = m.map(dS.listid(id), UsuarioDTO.class);
         return d;
     }
-    @PutMapping
+   /* @PutMapping
     public ResponseEntity<String>modificar(@RequestBody UsuarioDTO dto)
     {
         Optional<Usuario> usuarioExistente = Optional.ofNullable(dS.listid(dto.getIdUsuario()));
@@ -93,15 +107,15 @@ public class UsuarioController {
         } else {
             return ResponseEntity.notFound().build();
         }
-    }
+    }*/
 
 
-    @GetMapping("/usuariosroluser")
-   // @PreAuthorize("hasAuthority('admin')")
-    public List<UsuarioDTO> UsuariosRolUser(){
+    @GetMapping("/usuariosrolclientes")
+    // @PreAuthorize("hasAuthority('admin')")
+    public List<UsuarioDTO> UsuariosRolUser() {
         List<String[]> lista = dS.UsersRolUser();
         List<UsuarioDTO> listaDTO = new ArrayList<>();
-        for(String[] data:lista){
+        for (String[] data : lista) {
             UsuarioDTO dto = new UsuarioDTO();
             dto.setIdUsuario(Long.parseLong(data[0]));
             dto.setEmailUsuario(data[1]);
@@ -112,11 +126,12 @@ public class UsuarioController {
         }
         return listaDTO;
     }
+
     @GetMapping("/usuariosroladmin")
-    public List<UsuarioDTO> UsuariosRolAdmin(){
+    public List<UsuarioDTO> UsuariosRolAdmin() {
         List<String[]> lista = dS.UsersRolAdmin();
         List<UsuarioDTO> listaDTO = new ArrayList<>();
-        for(String[] data:lista){
+        for (String[] data : lista) {
             UsuarioDTO dto = new UsuarioDTO();
             dto.setIdUsuario(Long.parseLong(data[0]));
             dto.setEmailUsuario(data[1]);

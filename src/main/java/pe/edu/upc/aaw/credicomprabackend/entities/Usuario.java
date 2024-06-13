@@ -29,8 +29,7 @@ public class Usuario {
     private Long dniUsuario;
     @Column (name= "creditUsuario", nullable = false)
     private Double creditUsuario;
-    @Column(name = "saldoUsuario")
-    private Double saldoUsuario;
+
 
     @Column (name= "creditUsuarioAvailable")
     private Double creditUsuarioAvailable;
@@ -57,16 +56,9 @@ public class Usuario {
         this.creditUsuario = creditUsuario;
         this.creditUsuarioAvailable = creditUsuarioAvailable;
         this.roles = roles;
-        this.saldoUsuario=saldoUsuario;
+
     }
 
-    public Double getSaldoUsuario() {
-        return saldoUsuario;
-    }
-
-    public void setSaldoUsuario(Double saldoUsuario) {
-        this.saldoUsuario = saldoUsuario;
-    }
 
     public Long getIdUsuario() {
         return idUsuario;
