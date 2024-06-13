@@ -13,8 +13,8 @@ public class CreditoServiceImplement implements ICreditoService {
     @Autowired
     private ICreditoRepository cR;
     @Override
-    public void insert(Credito credito) {
-        cR.save(credito);
+    public Credito insert(Credito credito) {
+        return cR.save(credito);
     }
 
     @Override

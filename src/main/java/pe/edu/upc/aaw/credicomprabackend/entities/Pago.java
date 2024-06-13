@@ -12,24 +12,27 @@ public class Pago {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPago;
 
-    @ManyToOne
-    @JoinColumn(name = "idCredito")
-    private Credito credito;
     @Column(name = "amountPago")
     private Double amountPago;
-    @Column(name = "datePago")
-    private LocalDate datePago;
+    @Column(name = "dateRecorded")
+    private LocalDate dateRecorded;
+    @Column(name = "dateExpiration")
+    private LocalDate dateExpiration;
     @Column(name = "enablePago")
     private Boolean enablePago;
 
+    @ManyToOne
+    @JoinColumn(name = "idCredito")
+    private Credito credito;
     public Pago() {
     }
 
-    public Pago(Long idPago, Credito credito, Double amountPago, LocalDate datePago, Boolean enablePago) {
+    public Pago(Long idPago, Credito credito, Double amountPago, LocalDate dateRecorded, LocalDate dateExpiration, Boolean enablePago) {
         this.idPago = idPago;
         this.credito = credito;
         this.amountPago = amountPago;
-        this.datePago = datePago;
+        this.dateRecorded = dateRecorded;
+        this.dateExpiration = dateExpiration;
         this.enablePago = enablePago;
     }
 
@@ -57,12 +60,20 @@ public class Pago {
         this.amountPago = amountPago;
     }
 
-    public LocalDate getDatePago() {
-        return datePago;
+    public LocalDate getDateRecorded() {
+        return dateRecorded;
     }
 
-    public void setDatePago(LocalDate datePago) {
-        this.datePago = datePago;
+    public void setDateRecorded(LocalDate dateRecorded) {
+        this.dateRecorded = dateRecorded;
+    }
+
+    public LocalDate getDateExpiration() {
+        return dateExpiration;
+    }
+
+    public void setDateExpiration(LocalDate dateExpiration) {
+        this.dateExpiration = dateExpiration;
     }
 
     public Boolean getEnablePago() {

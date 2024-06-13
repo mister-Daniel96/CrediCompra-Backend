@@ -1,18 +1,23 @@
 package pe.edu.upc.aaw.credicomprabackend.dtos;
 import pe.edu.upc.aaw.credicomprabackend.entities.Usuario;
 
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import java.time.LocalDate;
 
 public class CreditoDTO {
+
     private Long idCredito;
-    private Usuario usuario;
     private Double interestRate;
-    private String duration;
+    private Long duration;
     private LocalDate dateRecorded;
+
     private double currentValue;
     private double remainingAmount;
     private Boolean annuities;
     private Boolean enableCredito;
+    private Usuario usuario;
 
     public Long getIdCredito() {
         return idCredito;
@@ -20,14 +25,6 @@ public class CreditoDTO {
 
     public void setIdCredito(Long idCredito) {
         this.idCredito = idCredito;
-    }
-
-    public Usuario getUsuario() {
-        return usuario;
-    }
-
-    public void setUsuario(Usuario usuario) {
-        this.usuario = usuario;
     }
 
     public Double getInterestRate() {
@@ -38,11 +35,11 @@ public class CreditoDTO {
         this.interestRate = interestRate;
     }
 
-    public String getDuration() {
+    public Long getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(Long duration) {
         this.duration = duration;
     }
 
@@ -84,5 +81,13 @@ public class CreditoDTO {
 
     public void setEnableCredito(Boolean enableCredito) {
         this.enableCredito = enableCredito;
+    }
+
+    public Usuario getUsuario() {
+        return usuario;
+    }
+
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }
