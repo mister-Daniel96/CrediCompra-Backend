@@ -21,7 +21,7 @@ public class Usuario {
 
     @Column(name = "enabledUsuario",nullable = false)
     private Boolean enabledUsuario;
-    @Column ( name = "streetUsuario",nullable = false)
+    @Column (name = "streetUsuario",nullable = false)
     private String streetUsuario;
     @Column(name="ageUsuario")
     private Long ageUsuario;

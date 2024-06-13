@@ -56,7 +56,7 @@ public class CreditoController {
     void generarPagosConAnualidad(Credito credito) {
 
         Double Anualidad;
-        Anualidad = (credito.getCurrentValue() * credito.getInterestRate()) / (1 - Math.pow(1 + credito.getInterestRate(), -1 * credito.getDuration()));
+        Anualidad = (credito.getCurrentValue() * credito.getInterestRate()/100) / (1 - Math.pow(1 + (credito.getInterestRate()/100), -1 * credito.getDuration()));
 
         System.out.println(Anualidad);
 
@@ -78,7 +78,7 @@ public class CreditoController {
 
     void generarPagoSinAnualidad(Credito credito) {
         double VF = 0;
-        VF = credito.getCurrentValue() * Math.pow((1 + credito.getInterestRate()), credito.getDuration());
+        VF = credito.getCurrentValue() * Math.pow((1 + (credito.getInterestRate()/100)), credito.getDuration());
 
         Pago pago = new Pago();
         pago.setAmountPago(VF);
