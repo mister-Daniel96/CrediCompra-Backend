@@ -2,14 +2,21 @@ package pe.edu.upc.aaw.credicomprabackend.dtos;
 
 
 import pe.edu.upc.aaw.credicomprabackend.entities.Credito;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
 public class PagoDTO {
+
     private Long idPago;
-    private Credito credito;
+
     private Double amountPago;
-    private LocalDate datePago;
+
+    private LocalDate dateRecorded;
+    private LocalDate dateExpiration;
     private Boolean enablePago;
+
+    private Credito credito;
 
     public Long getIdPago() {
         return idPago;
@@ -17,14 +24,6 @@ public class PagoDTO {
 
     public void setIdPago(Long idPago) {
         this.idPago = idPago;
-    }
-
-    public Credito getCredito() {
-        return credito;
-    }
-
-    public void setCredito(Credito credito) {
-        this.credito = credito;
     }
 
     public Double getAmountPago() {
@@ -35,12 +34,20 @@ public class PagoDTO {
         this.amountPago = amountPago;
     }
 
-    public LocalDate getDatePago() {
-        return datePago;
+    public LocalDate getDateRecorded() {
+        return dateRecorded;
     }
 
-    public void setDatePago(LocalDate datePago) {
-        this.datePago = datePago;
+    public void setDateRecorded(LocalDate dateRecorded) {
+        this.dateRecorded = dateRecorded;
+    }
+
+    public LocalDate getDateExpiration() {
+        return dateExpiration;
+    }
+
+    public void setDateExpiration(LocalDate dateExpiration) {
+        this.dateExpiration = dateExpiration;
     }
 
     public Boolean getEnablePago() {
@@ -49,5 +56,13 @@ public class PagoDTO {
 
     public void setEnablePago(Boolean enablePago) {
         this.enablePago = enablePago;
+    }
+
+    public Credito getCredito() {
+        return credito;
+    }
+
+    public void setCredito(Credito credito) {
+        this.credito = credito;
     }
 }

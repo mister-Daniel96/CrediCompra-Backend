@@ -11,29 +11,27 @@ public class Credito {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idCredito;
-
-    @ManyToOne
-    @JoinColumn(name = "idUsuario")
-    private Usuario usuario;
     @Column(name = "interestRate")
     private Double interestRate; //Ejm.: 24.5%
     @Column(name = "duration")
-    private String duration; //Duracion en meses
+    private Long duration; //Duracion en meses
     @Column(name = "dateRecorded")
     private LocalDate dateRecorded; //La fecha que se registra el credito
     @Column(name = "currentValue")
-    private double currentValue; //SI LEES ESTO EXPLICA QUE ES ESTA WEA :v
-    @Column(name = "remainingAmount")
+    private double currentValue; //ES EL VALOR DEL PRODUCTO O ALGO PARECIDO
+    @Column(name = "remainingAmount") //ES PARA VER EL MONTO QUE FALTA PAGAR
     private double remainingAmount; //El monto que le falta pagar del total, seria la diferencia del monto total con la suma de todos los pagos
-    @Column(name = "annuities")
+    @Column(name = "annuities") //VALIDAMOS SI ES ANUALIDAD O NO
     private Boolean annuities; //si es con anualidades se hace la operacion sino solo se saca el VF para el plazo dado
     @Column(name = "enableCredito")
     private Boolean enableCredito; //Para determinar si pago el credito
-
+    @ManyToOne
+    @JoinColumn(name = "idUsuario")
+    private Usuario usuario;
     public Credito() {
     }
 
-    public Credito(Long idCredito, Usuario usuario, Double interestRate, String duration, LocalDate dateRecorded, double currentValue, double remainingAmount, Boolean annuities, Boolean enableCredito) {
+    public Credito(Long idCredito, Usuario usuario, Double interestRate, Long duration, LocalDate dateRecorded, double currentValue, double remainingAmount, Boolean annuities, Boolean enableCredito) {
         this.idCredito = idCredito;
         this.usuario = usuario;
         this.interestRate = interestRate;
@@ -69,11 +67,11 @@ public class Credito {
         this.interestRate = interestRate;
     }
 
-    public String getDuration() {
+    public Long getDuration() {
         return duration;
     }
 
-    public void setDuration(String duration) {
+    public void setDuration(Long duration) {
         this.duration = duration;
     }
 
