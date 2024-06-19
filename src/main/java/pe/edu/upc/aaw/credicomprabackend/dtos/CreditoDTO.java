@@ -12,7 +12,6 @@ public class CreditoDTO {
     private Double interestRate;
     private Long duration;
     private LocalDate dateRecorded;
-
     private double currentValue;
     private double remainingAmount;
     private Boolean annuities;

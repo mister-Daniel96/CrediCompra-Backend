@@ -9,13 +9,10 @@ import java.time.LocalDate;
 public class PagoDTO {
 
     private Long idPago;
-
     private Double amountPago;
-
     private LocalDate dateRecorded;
     private LocalDate dateExpiration;
     private Boolean enablePago;
-
     private Credito credito;
 
     public Long getIdPago() {
