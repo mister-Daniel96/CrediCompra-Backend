@@ -89,10 +89,17 @@ public class CreditoController {
         long dias = ChronoUnit.DAYS.between(dateRecorded, dateExpiration);
         double tasaCredito = credito.getInterestRate() / 100;
 
-        double ted = (Math.pow((1 + tasaCredito), (1 / 30)) - 1);
+
+        System.out.println(dias);
+        double ted = (Math.pow((1 + tasaCredito), (1.0 / 30.0)) - 1);
+        System.out.println(ted);
 
         //VF = credito.getCurrentValue() * Math.pow((1 + (credito.getInterestRate() / 100)), credito.getDuration());
         VF = credito.getCurrentValue() * Math.pow((1 + ted), dias);
+        System.out.println("diasssssssssssssssss");
+
+        System.out.println(VF);
+
         Pago pago = new Pago();
         pago.setAmountPago(VF);
         pago.setDateRecorded(credito.getDateRecorded());

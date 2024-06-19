@@ -37,13 +37,14 @@ public class Credito {
         this.idCredito = idCredito;
         this.usuario = usuario;
         this.interestRate = interestRate;
+        this.dateExpiration=dateExpiration;
         this.duration = duration;
         this.dateRecorded = dateRecorded;
         this.currentValue = currentValue;
         this.remainingAmount = remainingAmount;
         this.annuities = annuities;
         this.enableCredito = enableCredito;
-        this.dateExpiration=dateExpiration;
+
     }
 
     public LocalDate getDateExpiration() {
