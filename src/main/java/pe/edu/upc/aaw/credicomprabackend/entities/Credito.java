@@ -17,6 +17,8 @@ public class Credito {
     private Long duration; //Duracion en meses
     @Column(name = "dateRecorded")
     private LocalDate dateRecorded; //La fecha que se registra el credito
+    @Column(name = "dateExpiration")
+    private LocalDate dateExpiration; //La fecha para pagar cuando sea unico
     @Column(name = "currentValue")
     private double currentValue; //ES EL VALOR DEL PRODUCTO O ALGO PARECIDO
     @Column(name = "remainingAmount") //ES PARA VER EL MONTO QUE FALTA PAGAR
@@ -31,16 +33,17 @@ public class Credito {
     public Credito() {
     }
 
-    public Credito(Long idCredito, Usuario usuario, Double interestRate, Long duration, LocalDate dateRecorded, double currentValue, double remainingAmount, Boolean annuities, Boolean enableCredito) {
+    public Credito(Long idCredito, Double interestRate, Long duration, LocalDate dateRecorded, LocalDate dateExpiration, double currentValue, double remainingAmount, Boolean annuities, Boolean enableCredito, Usuario usuario) {
         this.idCredito = idCredito;
-        this.usuario = usuario;
         this.interestRate = interestRate;
         this.duration = duration;
         this.dateRecorded = dateRecorded;
+        this.dateExpiration = dateExpiration;
         this.currentValue = currentValue;
         this.remainingAmount = remainingAmount;
         this.annuities = annuities;
         this.enableCredito = enableCredito;
+        this.usuario = usuario;
     }
 
     public Long getIdCredito() {
@@ -113,5 +116,13 @@ public class Credito {
 
     public void setEnableCredito(Boolean enableCredito) {
         this.enableCredito = enableCredito;
+    }
+
+    public LocalDate getDateExpiration() {
+        return dateExpiration;
+    }
+
+    public void setDateExpiration(LocalDate dateExpiration) {
+        this.dateExpiration = dateExpiration;
     }
 }

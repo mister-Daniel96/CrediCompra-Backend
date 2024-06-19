@@ -12,6 +12,7 @@ public class CreditoDTO {
     private Double interestRate;
     private Long duration;
     private LocalDate dateRecorded;
+    private LocalDate dateExpiration;
     private double currentValue;
     private double remainingAmount;
     private Boolean annuities;
@@ -88,5 +89,13 @@ public class CreditoDTO {
 
     public void setUsuario(Usuario usuario) {
         this.usuario = usuario;
+    }
+
+    public LocalDate getDateExpiration() {
+        return dateExpiration;
+    }
+
+    public void setDateExpiration(LocalDate dateExpiration) {
+        this.dateExpiration = dateExpiration;
     }
 }
