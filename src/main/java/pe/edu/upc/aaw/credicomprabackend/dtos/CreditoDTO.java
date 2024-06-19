@@ -19,6 +19,14 @@ public class CreditoDTO {
     private Boolean enableCredito;
     private Usuario usuario;
 
+    public LocalDate getDateExpiration() {
+        return dateExpiration;
+    }
+
+    public void setDateExpiration(LocalDate dateExpiration) {
+        this.dateExpiration = dateExpiration;
+    }
+
     public Long getIdCredito() {
         return idCredito;
     }

@@ -10,6 +10,8 @@ import pe.edu.upc.aaw.credicomprabackend.entities.Pago;
 import pe.edu.upc.aaw.credicomprabackend.serviceInterfaces.ICreditoService;
 
 import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -24,6 +26,8 @@ public class CreditoController {
     @PostMapping
     public void crear(@RequestBody CreditoDTO credito) {
         ModelMapper m = new ModelMapper();
+        credito.setDateRecorded(LocalDate.now());
+        //la fecha de vencimiento si sera ingresado por front
         Credito p = m.map(credito, Credito.class);
         Credito creditoGuardado = cS.insert(p);
         if (creditoGuardado.getAnnuities()) {
@@ -31,6 +35,7 @@ public class CreditoController {
         } else {
             generarPagoSinAnualidad(creditoGuardado);
         }
+        System.out.println(p);
     }
 
     @DeleteMapping("/{id}")
@@ -56,7 +61,7 @@ public class CreditoController {
     void generarPagosConAnualidad(Credito credito) {
 
         Double Anualidad;
-        Anualidad = (credito.getCurrentValue() * credito.getInterestRate()/100) / (1 - Math.pow(1 + (credito.getInterestRate()/100), -1 * credito.getDuration()));
+        Anualidad = (credito.getCurrentValue() * credito.getInterestRate() / 100) / (1 - Math.pow(1 + (credito.getInterestRate() / 100), -1 * credito.getDuration()));
 
         System.out.println(Anualidad);
 
@@ -76,21 +81,29 @@ public class CreditoController {
         }
     }
 
+    //ES PARA UNA FECHA CUAL SEA ES DECIR CUALQUIER DIA ES ELEGIDO COMO PAGO
     void generarPagoSinAnualidad(Credito credito) {
         double VF = 0;
-        VF = credito.getCurrentValue() * Math.pow((1 + (credito.getInterestRate()/100)), credito.getDuration());
+        LocalDate dateExpiration = credito.getDateExpiration();
+        LocalDate dateRecorded = credito.getDateRecorded();
+        long dias = ChronoUnit.DAYS.between(dateRecorded, dateExpiration);
+        double tasaCredito = credito.getInterestRate() / 100;
 
+        double ted = (Math.pow((1 + tasaCredito), (1 / 30)) - 1);
+
+        //VF = credito.getCurrentValue() * Math.pow((1 + (credito.getInterestRate() / 100)), credito.getDuration());
+        VF = credito.getCurrentValue() * Math.pow((1 + ted), dias);
         Pago pago = new Pago();
         pago.setAmountPago(VF);
         pago.setDateRecorded(credito.getDateRecorded());
-        LocalDate dateExpiration = credito.getDateRecorded().plusMonths(credito.getDuration());
+        //LocalDate dateExpiration = credito.getDateRecorded().plusMonths(credito.getDuration());
         pago.setDateExpiration(dateExpiration);
         pago.setEnablePago(true);
         pago.setCredito(credito);
 
         //INSERTAMOS EN LA BD
-        ModelMapper m=new ModelMapper();
-        PagoDTO d=m.map(pago,PagoDTO.class);
+        ModelMapper m = new ModelMapper();
+        PagoDTO d = m.map(pago, PagoDTO.class);
         PC.crear(d);
     }
 }

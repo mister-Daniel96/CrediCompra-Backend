@@ -33,7 +33,7 @@ public class Credito {
     public Credito() {
     }
 
-    public Credito(Long idCredito, Double interestRate, Long duration, LocalDate dateRecorded, LocalDate dateExpiration, double currentValue, double remainingAmount, Boolean annuities, Boolean enableCredito, Usuario usuario) {
+    public Credito(Long idCredito, Usuario usuario, Double interestRate, Long duration, LocalDate dateRecorded, double currentValue, double remainingAmount, Boolean annuities, Boolean enableCredito, LocalDate dateExpiration) {
         this.idCredito = idCredito;
         this.interestRate = interestRate;
         this.duration = duration;
@@ -44,6 +44,14 @@ public class Credito {
         this.annuities = annuities;
         this.enableCredito = enableCredito;
         this.usuario = usuario;
+    }
+
+    public LocalDate getDateExpiration() {
+        return dateExpiration;
+    }
+
+    public void setDateExpiration(LocalDate dateExpiration) {
+        this.dateExpiration = dateExpiration;
     }
 
     public Long getIdCredito() {
@@ -116,13 +124,5 @@ public class Credito {
 
     public void setEnableCredito(Boolean enableCredito) {
         this.enableCredito = enableCredito;
-    }
-
-    public LocalDate getDateExpiration() {
-        return dateExpiration;
-    }
-
-    public void setDateExpiration(LocalDate dateExpiration) {
-        this.dateExpiration = dateExpiration;
     }
 }
