@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.aaw.credicomprabackend.dtos.CreditoDTO;
 import pe.edu.upc.aaw.credicomprabackend.dtos.PagoDTO;
+import pe.edu.upc.aaw.credicomprabackend.dtos.UsuarioDTO;
 import pe.edu.upc.aaw.credicomprabackend.entities.Credito;
 import pe.edu.upc.aaw.credicomprabackend.entities.Pago;
 import pe.edu.upc.aaw.credicomprabackend.serviceInterfaces.IPagoService;
@@ -43,5 +44,12 @@ public class PagoController {
         ModelMapper m = new ModelMapper();
         Pago a = m.map(pagoDTO, Pago.class);
         iP.insert(a);
+    }
+
+    @GetMapping("/{id}")
+    public PagoDTO listarId(@PathVariable("id") Long id) {
+        ModelMapper m = new ModelMapper();
+        PagoDTO d = m.map(iP.listarId(id), PagoDTO.class);
+        return d;
     }
 }
