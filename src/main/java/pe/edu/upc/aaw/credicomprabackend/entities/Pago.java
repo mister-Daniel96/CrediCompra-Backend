@@ -11,7 +11,6 @@ public class Pago {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long idPago;
-
     @Column(name = "amountPago")
     private Double amountPago;
     @Column(name = "dateRecorded")
