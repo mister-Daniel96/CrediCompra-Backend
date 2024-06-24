@@ -10,4 +10,5 @@ public interface IPagoService {
     public void delete(Long idPago);
     public List<Pago> list();
     public Pago listarId(Long idPago);
+
 }

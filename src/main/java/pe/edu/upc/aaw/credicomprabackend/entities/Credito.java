@@ -36,6 +36,7 @@ public class Credito {
     public Credito(Long idCredito, Usuario usuario, Double interestRate, Long duration, LocalDate dateRecorded, double currentValue, double remainingAmount, Boolean annuities, Boolean enableCredito, LocalDate dateExpiration) {
         this.idCredito = idCredito;
         this.interestRate = interestRate;
+        this.dateExpiration=dateExpiration;
         this.duration = duration;
         this.dateRecorded = dateRecorded;
         this.dateExpiration = dateExpiration;
