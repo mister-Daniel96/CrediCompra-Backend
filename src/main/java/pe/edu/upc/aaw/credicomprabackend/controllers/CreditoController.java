@@ -61,13 +61,20 @@ public class CreditoController {
     void generarPagosConAnualidad(Credito credito) {
 
         Double Anualidad;
-        Anualidad = (credito.getCurrentValue() * credito.getInterestRate() / 100) / (1 - Math.pow(1 + (credito.getInterestRate() / 100), -1 * credito.getDuration()));
+        long periododeGracia = credito.getGracePeriod();
+        Double valorInicial = credito.getCurrentValue();
 
-        System.out.println(Anualidad);
+        Anualidad = (credito.getCurrentValue() * credito.getInterestRate() / 100) / (1 - Math.pow(1 + (credito.getInterestRate() / 100), -1 * (credito.getDuration()- credito.getGracePeriod())));
 
         for (int i = 1; i <= credito.getDuration(); i++) {
             Pago pago = new Pago();
-            pago.setAmountPago(Anualidad);
+            if(i<= periododeGracia){
+            Double pagointeres = valorInicial* (credito.getInterestRate()/100);
+                pago.setAmountPago(pagointeres);
+            }
+            else {
+                pago.setAmountPago(Anualidad);
+            }
             pago.setDateRecorded(credito.getDateRecorded());
             LocalDate dateExpiration = credito.getDateRecorded().plusMonths(i);
             pago.setDateExpiration(dateExpiration);
