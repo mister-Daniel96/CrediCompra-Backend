@@ -17,7 +17,16 @@ public class CreditoDTO {
     private double remainingAmount;
     private Boolean annuities;
     private Boolean enableCredito;
+    private Long gracePeriod;
     private Usuario usuario;
+
+    public Long getGracePeriod() {
+        return gracePeriod;
+    }
+
+    public void setGracePeriod(Long gracePeriod) {
+        this.gracePeriod = gracePeriod;
+    }
 
     public LocalDate getDateExpiration() {
         return dateExpiration;

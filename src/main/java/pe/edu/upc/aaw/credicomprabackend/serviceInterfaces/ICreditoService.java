@@ -1,5 +1,7 @@
 package pe.edu.upc.aaw.credicomprabackend.serviceInterfaces;
 
+import org.springframework.web.bind.annotation.PathVariable;
+import pe.edu.upc.aaw.credicomprabackend.dtos.CreditoDTO;
 import pe.edu.upc.aaw.credicomprabackend.entities.Credito;
 
 import java.util.List;

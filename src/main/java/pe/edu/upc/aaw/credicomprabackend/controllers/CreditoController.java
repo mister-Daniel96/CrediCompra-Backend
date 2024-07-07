@@ -22,7 +22,12 @@ public class CreditoController {
     private ICreditoService cS;
     @Autowired
     private PagoController PC;
-
+    @GetMapping("/{id}")
+    public CreditoDTO listarId(@PathVariable("id") Long id) {
+        ModelMapper m = new ModelMapper();
+        CreditoDTO d = m.map(cS.listarId(id), CreditoDTO.class);
+        return d;
+    }
     @PostMapping
     public void crear(@RequestBody CreditoDTO credito) {
         ModelMapper m = new ModelMapper();
@@ -58,23 +63,50 @@ public class CreditoController {
         cS.insert(a);
     }
 
+    /* (i <= periododeGracia) {
+           Double pagointeres = valorInicial * (nuevoMontoParaAnualidad / 100.0);
+           nuevoMontoParaAnualidad += pagointeres;
+           //AHORA SE CREAN ANUALIDADES EN BASE A ESTE MONTo
+
+           // pago.setAmountPago(pagointeres);
+       } else {
+           // pago.setAmountPago(Anualidad);
+       }*/
     void generarPagosConAnualidad(Credito credito) {
 
         Double Anualidad;
-        Anualidad = (credito.getCurrentValue() * credito.getInterestRate() / 100) / (1 - Math.pow(1 + (credito.getInterestRate() / 100), -1 * credito.getDuration()));
+        long periodoDeGracia = credito.getGracePeriod();
+        Double valorInicial = credito.getCurrentValue();
+        Double tasaInteres = credito.getInterestRate() / 100;
 
-        System.out.println(Anualidad);
+        // Calcular la anualidad basada en el monto inicial y la duración total
+       /* Anualidad = (valorInicial * tasaInteres) /
+                (1 - Math.pow(1 + tasaInteres, -1 * (credito.getDuration() - periodoDeGracia)));
 
-        for (int i = 1; i <= credito.getDuration(); i++) {
+        System.out.println(Anualidad);*/
+        Double nuevoMontoParaAnualidad = valorInicial;
+
+        // Acumular intereses durante el período de gracia
+        for (int i = 1; i <= periodoDeGracia; i++) {
+            Double pagointeres = nuevoMontoParaAnualidad * tasaInteres;
+            nuevoMontoParaAnualidad += pagointeres;
+        }
+
+        // Calcular la nueva anualidad basada en el nuevo monto ajustado después del período de gracia
+        Anualidad = (nuevoMontoParaAnualidad * tasaInteres) /
+                (1 - Math.pow(1 + tasaInteres, -1 * (credito.getDuration() - periodoDeGracia)));
+
+        for (int i = 1; i <= credito.getDuration()-credito.getGracePeriod(); i++) {
             Pago pago = new Pago();
+
             pago.setAmountPago(Anualidad);
             pago.setDateRecorded(credito.getDateRecorded());
-            LocalDate dateExpiration = credito.getDateRecorded().plusMonths(i);
+            LocalDate dateExpiration = credito.getDateRecorded().plusMonths(i + periodoDeGracia);
             pago.setDateExpiration(dateExpiration);
             pago.setEnablePago(true);
             pago.setCredito(credito);
 
-            //INSERTAMOS EN LA BD
+            // INSERTAMOS EN LA BD
             ModelMapper m = new ModelMapper();
             PagoDTO d = m.map(pago, PagoDTO.class);
             PC.crear(d);

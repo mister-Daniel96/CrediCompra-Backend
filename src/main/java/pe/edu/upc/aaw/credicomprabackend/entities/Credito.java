@@ -27,13 +27,22 @@ public class Credito {
     private Boolean annuities; //si es con anualidades se hace la operacion sino solo se saca el VF para el plazo dado
     @Column(name = "enableCredito")
     private Boolean enableCredito; //Para determinar si pago el credito
+    @Column(name = "gracePeriod")
+    private long gracePeriod; //Tiempo de periodo de gracia
     @ManyToOne
     @JoinColumn(name = "idUsuario")
     private Usuario usuario;
     public Credito() {
     }
 
-    public Credito(Long idCredito, Usuario usuario, Double interestRate, Long duration, LocalDate dateRecorded, double currentValue, double remainingAmount, Boolean annuities, Boolean enableCredito, LocalDate dateExpiration) {
+    public Credito(Long idCredito, Usuario usuario,
+                   Double interestRate, Long duration,
+                   LocalDate dateRecorded,
+                   double currentValue,
+                   double remainingAmount,
+                   Boolean annuities,
+                   Boolean enableCredito,
+                   LocalDate dateExpiration,long gracePeriod) {
         this.idCredito = idCredito;
         this.usuario = usuario;
         this.interestRate = interestRate;
@@ -43,8 +52,17 @@ public class Credito {
         this.currentValue = currentValue;
         this.remainingAmount = remainingAmount;
         this.annuities = annuities;
+        this.gracePeriod = gracePeriod;
         this.enableCredito = enableCredito;
 
+    }
+
+    public long getGracePeriod() {
+        return gracePeriod;
+    }
+
+    public void setGracePeriod(long gracePeriod) {
+        this.gracePeriod = gracePeriod;
     }
 
     public LocalDate getDateExpiration() {
